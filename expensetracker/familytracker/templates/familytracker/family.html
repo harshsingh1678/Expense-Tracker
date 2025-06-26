@@ -1,0 +1,94 @@
+{% load static %}
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    {% tailwind_css %}
+
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-6">
+        <h1 class="text-4xl font-bold mb-6 text-center">Family Expense Tracker</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-lg font-semibold">Total Earnings</h2>
+                <p class="text-2xl text-green-600">₹{{ total_earnings }}</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-lg font-semibold">Balance</h2>
+                <p class="text-2xl font-bold">₹{{ balance }}</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-semibold mb-2">Add Member</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ member_form.as_p }}
+                    <button type="submit" name="add_member" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Add
+                        Member</button>
+                </form>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-semibold mb-2">Add Earning</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ earning_form.as_p }}
+                    <button type="submit" name="add_earning" class="mt-2 px-4 py-2 bg-green-500 text-white rounded">Add
+                        Earning</button>
+                </form>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-semibold mb-2">Add Expense</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ expense_form.as_p }}
+                    <button type="submit" name="add_expense" class="mt-2 px-4 py-2 bg-red-500 text-white rounded">Add
+                        Expense</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-semibold mb-2">Members</h2>
+                <ul class="list-disc list-inside">
+                    {% for member in members %}
+                    <li>{{ member.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-semibold mb-2">Earnings</h2>
+                <ul class="list-disc list-inside">
+                    {% for earning in earnings %}
+                    <li>{{ earning.member }} - ₹{{ earning.amount }} on {{ earning.date }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-semibold mb-2">Expenses</h2>
+                <ul class="list-disc list-inside">
+                    {% for expense in expenses %}
+                    <li>{{ expense.member }} - ₹{{ expense.amount }} for {{ expense.description }} on {{ expense.date }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

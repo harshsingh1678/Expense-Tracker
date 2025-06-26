@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "batisteo.vscode-django",
+        "github.github-vscode-theme",
+        "ms-python.vscode-pylance",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "bradlc.vscode-tailwindcss",
+        "vscode-icons-team.vscode-icons"
+    ]
+}

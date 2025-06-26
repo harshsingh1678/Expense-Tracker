@@ -1,0 +1,78 @@
+{% load static %}
+{% load tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en" class="transition duration-300">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Expense Tracker{% endblock %}</title>
+    
+    {% tailwind_css %}
+
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#4f46e5',
+            },
+          },
+        },
+      }
+
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem(
+          'theme',
+          document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        );
+      }
+
+      window.onload = function () {
+        if (localStorage.getItem('theme') === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      };
+    </script>
+  </head>
+  <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="bg-white dark:bg-gray-800 border-b dark:border-gray-700 shadow-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <a href="/" class="text-2xl font-bold text-indigo-600 dark:text-white">ExpenseTracker</a>
+
+          <!-- Navigation Links -->
+          <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-600 dark:text-gray-300">
+            <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Home</a>
+            <a href="/earnings/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Earnings</a>
+            <a href="/expenses/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Expenses</a>
+            <a href="/members/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Members</a>
+          </nav>
+
+          <!-- Dark Mode Toggle -->
+          <button onclick="toggleDarkMode()" class="ml-4 px-3 py-1 border border-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            Toggle Dark Mode
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="flex-1 container mx-auto px-6 py-10">
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-10">
+      <div class="container mx-auto px-6 py-6 text-center text-gray-600 dark:text-gray-400 text-sm">
+        &copy; 2025 Expense Tracker. All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>

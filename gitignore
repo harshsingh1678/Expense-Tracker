@@ -1,0 +1,40 @@
+
+# Python and Django
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+
+# Django database
+db.sqlite3
+
+# Virtual environment
+myenv/
+venv/
+env/
+
+# Secrets and environment config
+.env
+.env.*
+password.txt
+
+# VS Code and IDE files
+.vscode/
+.idea/
+
+# Git ignored folders
+.git/
+
+# Node (if Tailwind or npm used)
+node_modules/
+
+# Staticfiles (Django collectstatic output)
+staticfiles/
+staticfiles_build/
+
+# Django Migrations (optional, for fresh setup)
+**/migrations/*.py
+!**/migrations/__init__.py
